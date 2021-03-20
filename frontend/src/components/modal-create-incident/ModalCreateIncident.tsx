@@ -1,0 +1,197 @@
+import React, { FunctionComponent, useState } from "react";
+import ReactDOM from "react-dom";
+import "antd/dist/antd.css";
+import { Button, Modal, Form, Input, Radio, Select, DatePicker } from "antd";
+import moment from "moment";
+import { withRouter } from "react-router-dom";
+import { createIncident } from "../../actions/incidentsActions";
+import { connect } from "react-redux";
+import { SimpleMap } from "../../../../simple-map";
+export const dateFormat = "DD/MM/YYYY";
+
+
+interface CollectionCreateFormProps {
+  visible: boolean;
+  onCreate: (data: any) => void;
+  onCancel: () => void;
+}
+
+const CollectionCreateForm = (props: CollectionCreateFormProps) => {
+  const { visible, onCreate, onCancel } = props;
+  const [form] = Form.useForm();
+  const { Option } = Select;
+
+  return (
+    <Modal
+      visible={visible}
+      title="Create a new Incident"
+      okText="Create"
+      cancelText="Cancel"
+      onCancel={onCancel}
+      onOk={() => {
+        form
+          .validateFields()
+          .then((values) => {
+            form.resetFields();
+            onCreate(values);
+          })
+          .catch((info) => {
+            console.log("Validate Failed:", info);
+          });
+      }}
+    >
+      <Form
+        form={form}
+        layout="vertical"
+        name="form_in_modal"
+        initialValues={{
+          modifier: "public",
+        }}
+      >
+        <Form.Item
+          name="name"
+          label="Name"
+          rules={[
+            {
+              required: true,
+              message: "Please input the name of incident",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="description"
+          label="Description"
+          rules={[
+            {
+              required: true,
+              message: "Please input the description of incident",
+            },
+          ]}
+        >
+          <Input type="textarea" />
+        </Form.Item>
+        <Form.Item name="assignee" label="Assignee" hasFeedback>
+          <Select placeholder="Please select a person" />
+        </Form.Item>
+        <Form.Item
+          name="area"
+          label="Area"
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "Please input the area of incident",
+            },
+          ]}
+        >
+          <Select placeholder="Please select an area">
+            <Option value="Bookkeeping">Bookkeeping</Option>
+            <Option value="HR">HR</Option>
+            <Option value="Technical support">Technical support</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item
+          name="DateDue"
+          label="Due Date"
+          rules={[
+            {
+              required: true,
+              message: "Please input the end date of the incident",
+            },
+          ]}
+        >
+          <DatePicker
+            defaultValue={moment("01/01/2022", dateFormat)}
+            format={dateFormat}
+          />
+        </Form.Item>
+        <Form.Item
+          name="priority"
+          label="Priority"
+          rules={[
+            {
+              required: true,
+              message: "Please input the priority of the incident",
+            },
+          ]}
+        >
+          <Select placeholder="Please select a priority">
+            <Option value="Blocker">Blocker</Option>
+            <Option value="Critical">Critical</Option>
+            <Option value="Major">Major</Option>
+            <Option value="Normal">Minor</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item
+          name="status"
+          label="Status"
+          rules={[
+            {
+              required: true,
+              message: "Please input status of the incident",
+            },
+          ]}
+        >
+          <Select placeholder="Please select a status">
+            <Option value="Open">Open</Option>
+            <Option value="Additional information is required">
+              Additional information is required
+            </Option>
+            <Option value="Information provided">Information provided</Option>
+            <Option value="Fixed">Fixed</Option>
+            <Option value="Checked">Checked</Option>
+            <Option value="Closed">Closed</Option>
+            <Option value="Reopened">Reopened</Option>
+            <Option value="Reject">Reject</Option>
+          </Select>
+        </Form.Item>
+      </Form>
+    </Modal>
+  );
+};
+
+export { CollectionCreateForm };
+
+// const CollectionsPage: FunctionComponent<any> = (props: {
+//   createIncident: (incident: object) => void;
+// }) => {
+//   const [visible, setVisible] = useState(false);
+//
+//   const onCreate = (values: any) => {
+//     console.log("Received values of form: ", values);
+//     let incident = values;
+//     props.createIncident(incident);
+//     console.log(incident);
+//     setVisible(false);
+//   };
+//
+//   return (
+//     <div>
+//       <Button
+//         type="primary"
+//         onClick={() => {
+//           setVisible(true);
+//         }}
+//       >
+//         New Collection
+//       </Button>
+//       <CollectionCreateForm
+//         visible={visible}
+//         onCreate={onCreate}
+//         onCancel={() => {
+//           setVisible(false);
+//         }}
+//       />
+//     </div>
+//   );
+// };
+//
+// const mapStateToProps = (state: { incident: object }) => ({
+//   incident: state.incident,
+// });
+//
+// export default connect(mapStateToProps, {
+//   createIncident,
+// })(withRouter(CollectionsPage));

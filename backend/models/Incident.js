@@ -36,8 +36,4 @@ const IncidentSchema = new Schema({
   }
 });
 
-// export const IncidentSchema: Schema = new Schema(IncidentSchemaModel, {
-//   timestamps: false,
-// });
-
 module.exports = Incident = mongoose.model("incidents", IncidentSchema);
