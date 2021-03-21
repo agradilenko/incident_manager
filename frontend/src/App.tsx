@@ -17,6 +17,7 @@ import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import CollectionsPage
   from "./components/modal-create-incident/ModalCreateIncidentWrapper";
+import NotFound from "./components/404/404";
 
 
 
@@ -36,6 +37,8 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/test" component={CollectionsPage} />
+          <Route exact path="/2" component={NotFound} />
+
         </div>
       </Router>
     </Provider>

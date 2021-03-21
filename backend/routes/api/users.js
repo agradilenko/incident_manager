@@ -51,6 +51,20 @@ router.post("/register", (req, res) => {
   });
 });
 
+
+// @route GET api/users/
+// @desc Get all users names
+// @access Private
+router.get(
+  "/",
+  // passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    User.find().then((user) => res.json(user.map(u=>({name: u.name}))));
+  }
+);
+
+
+
 // @route POST api/users/login
 // @desc Login user and return JWT token
 // @access Public
@@ -105,6 +119,7 @@ router.post("/login", (req, res) => {
       }
     });
   });
-});
+}
+);
 
 module.exports = router;

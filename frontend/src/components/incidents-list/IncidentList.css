@@ -1,0 +1,39 @@
+.high {
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #F9012C;
+}
+
+.open {
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #E3D10A;
+}
+
+.Normal {
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #34D81D;
+}
+
+.Major {
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #8D1DD8;
+}
+
+.Critical {
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #060606;
+}

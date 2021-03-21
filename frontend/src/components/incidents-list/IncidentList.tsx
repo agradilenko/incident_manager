@@ -1,14 +1,23 @@
 import React, { Component } from "react";
-import { ColumnsType } from "antd/es/table";
-import { Link, Route } from "react-router-dom";
-import { RouteComponentProps } from "react-router";
-import { GET_INCIDENTS } from "../../actions/types";
-
 import { Table } from "antd";
 import { connect } from "react-redux";
+import "./IncidentList.css"
+
+type Incident = {
+  area: string;
+  assignee?: string;
+  dateCreated: string;
+  dateDue: string;
+  description: string;
+  name: string;
+  priority: string;
+  status: string;
+  __v: number;
+  _id: string;
+};
 
 interface IncidentListProps {
-  incidents: [{}]
+  incidents: Incident[];
 }
 
 interface IncidentListState {
@@ -55,6 +64,9 @@ const columns = [
     title: "Icon",
     dataIndex: "icon",
     key: "icon",
+    render: (data: any, item: any) => {
+      return <div className={item?.priority}/>;
+    },
   },
   {
     title: "Status",
@@ -74,6 +86,7 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
   render() {
     // @ts-ignore
     const { incidents } = this.props.incidents;
+    console.log(incidents);
     return (
       <div>
         <Table
@@ -85,7 +98,7 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
   }
 }
 
-const mapStateToProps = (state: { incidents: [{}] }) => ({
+const mapStateToProps = (state: { incidents: Incident[] }) => ({
   incidents: state.incidents,
 });
 

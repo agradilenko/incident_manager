@@ -77,7 +77,7 @@ class Register extends Component<
     }
   }
 
-  componentWillReceiveProps(nextProps: { errors: object }) {
+  componentWillReceiveProps(nextProps: { errors: ErrorInterface }) {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors,
@@ -190,7 +190,7 @@ class Register extends Component<
   }
 }
 
-const mapStateToProps = (state: { auth: any; errors: any }) => ({
+const mapStateToProps = (state: { auth: AuthInterface; errors: ErrorInterface }) => ({
   auth: state.auth,
   errors: state.errors,
 });

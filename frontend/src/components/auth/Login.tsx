@@ -58,7 +58,7 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
 
   componentWillReceiveProps(nextProps: {
     auth: { isAuthenticated: boolean };
-    errors: object;
+    errors: ErrorInterface;
   }) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
@@ -71,10 +71,9 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
     }
   }
 
-  onChange = (e: React.SyntheticEvent) => {
+  onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-    // @ts-ignore
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ email: e.currentTarget.value });
   };
 
   onSubmit = (

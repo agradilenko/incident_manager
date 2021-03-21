@@ -1,10 +1,16 @@
-import { SET_CURRENT_USER, USER_LOADING } from "../actions/types";
+import {
+  GET_INCIDENTS,
+  GET_USERS,
+  SET_CURRENT_USER,
+  USER_LOADING
+} from "../actions/types";
 
 import isEmpty from "is-empty";
 
 const initialState = {
   isAuthenticated: false,
   user: {},
+  users: [],
   loading: false
 };
 
@@ -21,6 +27,11 @@ export default function(state = initialState, action: { type: string; payload: o
       return {
         ...state,
         loading: true
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        usersNames: action.payload,
       };
     default:
       return state;

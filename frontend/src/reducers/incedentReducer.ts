@@ -12,7 +12,7 @@ interface IncidentState {
 }
 
 interface Incident {
-  _id: string;
+  _id: string | number;
 }
 
 const initialState: IncidentState = {

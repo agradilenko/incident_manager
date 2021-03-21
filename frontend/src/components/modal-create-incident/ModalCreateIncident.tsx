@@ -1,25 +1,38 @@
-import React, { FunctionComponent, useState } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import "antd/dist/antd.css";
-import { Button, Modal, Form, Input, Radio, Select, DatePicker } from "antd";
+import { Modal, Form, Input, Select, DatePicker } from "antd";
 import moment from "moment";
-import { withRouter } from "react-router-dom";
-import { createIncident } from "../../actions/incidentsActions";
-import { connect } from "react-redux";
-import { SimpleMap } from "../../../../simple-map";
+import { getUsersList } from "../../actions/authActions";
 export const dateFormat = "DD/MM/YYYY";
 
+type DataType = {
+  area: string;
+  assignee?: string;
+  DateDue: object;
+  description: string;
+  name: string;
+  priority: string;
+  status: string;
+};
 
 interface CollectionCreateFormProps {
   visible: boolean;
-  onCreate: (data: any) => void;
+  onCreate: (data: DataType) => void;
   onCancel: () => void;
+  userNames: any;
 }
 
 const CollectionCreateForm = (props: CollectionCreateFormProps) => {
-  const { visible, onCreate, onCancel } = props;
+  const { visible, onCreate, onCancel, userNames } = props;
   const [form] = Form.useForm();
   const { Option } = Select;
+
+  function disabledDate(current: object) {
+    // any потому что возвращается
+    // моментовский объект с очень сложной структурой
+    // Can not select days before today and today
+    return current && current < moment().endOf("day");
+  }
 
   return (
     <Modal
@@ -32,6 +45,7 @@ const CollectionCreateForm = (props: CollectionCreateFormProps) => {
         form
           .validateFields()
           .then((values) => {
+            console.log(values);
             form.resetFields();
             onCreate(values);
           })
@@ -58,7 +72,7 @@ const CollectionCreateForm = (props: CollectionCreateFormProps) => {
             },
           ]}
         >
-          <Input />
+          <Input maxLength={50} />
         </Form.Item>
         <Form.Item
           name="description"
@@ -73,7 +87,7 @@ const CollectionCreateForm = (props: CollectionCreateFormProps) => {
           <Input type="textarea" />
         </Form.Item>
         <Form.Item name="assignee" label="Assignee" hasFeedback>
-          <Select placeholder="Please select a person" />
+          <Select placeholder="Please select a person" options={userNames} />
         </Form.Item>
         <Form.Item
           name="area"
@@ -103,7 +117,8 @@ const CollectionCreateForm = (props: CollectionCreateFormProps) => {
           ]}
         >
           <DatePicker
-            defaultValue={moment("01/01/2022", dateFormat)}
+            // defaultValue={moment("01/01/2022", dateFormat)}
+            disabledDate={disabledDate}
             format={dateFormat}
           />
         </Form.Item>
@@ -153,45 +168,3 @@ const CollectionCreateForm = (props: CollectionCreateFormProps) => {
 };
 
 export { CollectionCreateForm };
-
-// const CollectionsPage: FunctionComponent<any> = (props: {
-//   createIncident: (incident: object) => void;
-// }) => {
-//   const [visible, setVisible] = useState(false);
-//
-//   const onCreate = (values: any) => {
-//     console.log("Received values of form: ", values);
-//     let incident = values;
-//     props.createIncident(incident);
-//     console.log(incident);
-//     setVisible(false);
-//   };
-//
-//   return (
-//     <div>
-//       <Button
-//         type="primary"
-//         onClick={() => {
-//           setVisible(true);
-//         }}
-//       >
-//         New Collection
-//       </Button>
-//       <CollectionCreateForm
-//         visible={visible}
-//         onCreate={onCreate}
-//         onCancel={() => {
-//           setVisible(false);
-//         }}
-//       />
-//     </div>
-//   );
-// };
-//
-// const mapStateToProps = (state: { incident: object }) => ({
-//   incident: state.incident,
-// });
-//
-// export default connect(mapStateToProps, {
-//   createIncident,
-// })(withRouter(CollectionsPage));

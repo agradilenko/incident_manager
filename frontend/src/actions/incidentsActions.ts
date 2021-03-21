@@ -9,11 +9,24 @@ import {
 } from "./types";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import {RouteComponentProps} from "react-router";
-import {Route} from "react-router-dom";
+import {History} from "history";
+
+type Incident = {
+  area: string,
+  assignee?: string,
+  dateCreated: string,
+  dateDue: string,
+  description: string,
+  name: string,
+  priority: string,
+  status: string,
+  __v: number,
+  _id: string
+}
+
 
 // Create Incident
-export const createIncident = (incidentData: object) => (
+export const createIncident = (incidentData: Incident) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   axios
@@ -28,7 +41,7 @@ export const createIncident = (incidentData: object) => (
 };
 
 // Update Incident
-export const updateIncident = (incidentData: object) => (
+export const updateIncident = (incidentData: Incident) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   axios
@@ -43,7 +56,7 @@ export const updateIncident = (incidentData: object) => (
 };
 
 // Delete Incident
-export const deleteIncident = (id: number | string, history: History[] ) => (
+export const deleteIncident = (id: number | string, history: History ) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   axios
@@ -54,7 +67,6 @@ export const deleteIncident = (id: number | string, history: History[] ) => (
         payload: id,
       })
     )
-    // @ts-ignore
     .then((res) => history.push("/dashboard"))
     .catch((err) => console.log(err));
 };
@@ -79,7 +91,7 @@ export const getIncident = (id: number | string) => (
     );
 };
 
-// Get all incidents for specific user
+// Get all incidents
 export const getIncidents = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {

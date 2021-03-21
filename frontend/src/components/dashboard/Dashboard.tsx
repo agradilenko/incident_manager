@@ -5,6 +5,11 @@ import { getIncidents } from "../../actions/incidentsActions";
 import IncidentList from "../incidents-list/IncidentList";
 import "antd/dist/antd.css";
 
+
+interface AuthInterface {
+  isAuthenticated: boolean;
+}
+
 interface IProps {
   logoutUser: () => void
   getIncidents: () => void
@@ -42,7 +47,7 @@ class Dashboard extends Component<IProps, IState> {
   }
 }
 
-const mapStateToProps = (state: { auth: object; incidents: [{}] }) => ({
+const mapStateToProps = (state: { auth: AuthInterface; incidents: [{}] }) => ({
   auth: state.auth,
   incidents: state.incidents,
 });
