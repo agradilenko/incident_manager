@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Table } from "antd";
 import { connect } from "react-redux";
 import "./IncidentList.css"
+import moment from "moment";
 
 type Incident = {
   area: string;
@@ -44,6 +45,9 @@ const columns = [
     title: "StartDate",
     dataIndex: "dateCreated",
     key: "dateCreated",
+    render: (data: any, item: any) => {
+      return moment(item.dateCreated).format('DD.MM.YYYY')
+    }
   },
   {
     title: "DueDate",

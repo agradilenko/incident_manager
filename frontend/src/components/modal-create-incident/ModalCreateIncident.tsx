@@ -2,8 +2,7 @@ import React from "react";
 import "antd/dist/antd.css";
 import { Modal, Form, Input, Select, DatePicker } from "antd";
 import moment from "moment";
-import { getUsersList } from "../../actions/authActions";
-export const dateFormat = "DD/MM/YYYY";
+export const dateFormat = "DD.MM.YYYY";
 
 type DataType = {
   area: string;
@@ -117,7 +116,6 @@ const CollectionCreateForm = (props: CollectionCreateFormProps) => {
           ]}
         >
           <DatePicker
-            // defaultValue={moment("01/01/2022", dateFormat)}
             disabledDate={disabledDate}
             format={dateFormat}
           />
