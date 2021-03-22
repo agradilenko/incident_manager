@@ -20,10 +20,20 @@ type Incident = {
   _id: string;
 };
 
+interface userListInterface {
+  title: string;
+  value: string;
+}
+
 interface CollectionsPageProps {
   createIncident: (incident: SimpleMap<any>) => void;
   getUsersList: () => void;
-  userList: any[];
+  userList: userListInterface[];
+}
+
+interface authInterface {
+  isAuthenticated: boolean;
+  userList: userListInterface[];
 }
 
 const CollectionsPage: FunctionComponent<any> = (
@@ -35,9 +45,11 @@ const CollectionsPage: FunctionComponent<any> = (
   useEffect(() => {
     getUsersList();
     return () => {
-      console.log("awd");
+      console.log(userList);
     };
   }, []);
+
+  console.log(userList);
 
   const onCreate = (values: any) => {
     const resultData: SimpleMap<any> = {
@@ -56,7 +68,7 @@ const CollectionsPage: FunctionComponent<any> = (
           setVisible(true);
         }}
       >
-        New Collection
+        New Incident
       </Button>
       <CollectionCreateForm
         userNames={userList}
@@ -70,9 +82,12 @@ const CollectionsPage: FunctionComponent<any> = (
   );
 };
 
-const mapStateToProps = (state: { userList: any; incident: Incident }) => ({
+const mapStateToProps = (state: {
+  userList: authInterface;
+  incident: Incident;
+}) => ({
   incident: state.incident,
-// @ts-ignore
+  // @ts-ignore
   userList: state.auth.usersNames,
 });
 

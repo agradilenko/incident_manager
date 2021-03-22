@@ -181,7 +181,7 @@ class Register extends Component<
           </div>
           <BottomGroup>
             <AuthLink>
-              <Link to="/Login">Sign in</Link>
+              <Link to="/">Sign in</Link>
             </AuthLink>
           </BottomGroup>
         </AuthForm>
@@ -190,7 +190,10 @@ class Register extends Component<
   }
 }
 
-const mapStateToProps = (state: { auth: AuthInterface; errors: ErrorInterface }) => ({
+const mapStateToProps = (state: {
+  auth: AuthInterface;
+  errors: ErrorInterface;
+}) => ({
   auth: state.auth,
   errors: state.errors,
 });

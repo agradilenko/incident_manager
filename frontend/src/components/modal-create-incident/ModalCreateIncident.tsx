@@ -115,10 +115,7 @@ const CollectionCreateForm = (props: CollectionCreateFormProps) => {
             },
           ]}
         >
-          <DatePicker
-            disabledDate={disabledDate}
-            format={dateFormat}
-          />
+          <DatePicker disabledDate={disabledDate} format={dateFormat} />
         </Form.Item>
         <Form.Item
           name="priority"

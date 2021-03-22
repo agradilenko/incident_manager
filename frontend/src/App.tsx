@@ -33,11 +33,11 @@ function App() {
     <Provider store={store}>
       <Router>
         <div>
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/test" component={CollectionsPage} />
-          <Route exact path="/2" component={NotFound} />
+          <Route exact path="/t" component={NotFound} />
 
         </div>
       </Router>

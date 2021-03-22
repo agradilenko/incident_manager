@@ -2,7 +2,7 @@ import {
   GET_INCIDENTS,
   GET_USERS,
   SET_CURRENT_USER,
-  USER_LOADING
+  USER_LOADING,
 } from "../actions/types";
 
 import isEmpty from "is-empty";
@@ -11,22 +11,24 @@ const initialState = {
   isAuthenticated: false,
   user: {},
   users: [],
-  loading: false
+  loading: false,
 };
 
-
-export default function(state = initialState, action: { type: string; payload: object; }) {
+export default function (
+  state = initialState,
+  action: { type: string; payload: object }
+) {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {
         ...state,
         isAuthenticated: !isEmpty(action.payload),
-        user: action.payload
+        user: action.payload,
       };
     case USER_LOADING:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case GET_USERS:
       return {

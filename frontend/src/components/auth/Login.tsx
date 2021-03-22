@@ -39,10 +39,10 @@ interface LoginState {
 }
 
 class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
-  state: LoginState
+  state: LoginState;
   constructor(props: LoginProps & RouteComponentProps) {
     super(props);
-    this.state  = {
+    this.state = {
       email: "",
       password: "",
       errors: {},
@@ -72,8 +72,8 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
   }
 
   onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-    this.setState({ email: e.currentTarget.value });
+    // @ts-ignore
+    this.setState({ [e.target.name]: e.currentTarget.value });
   };
 
   onSubmit = (
@@ -106,9 +106,7 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
                 value={this.state.email}
                 error={errors.email}
               />
-              <AuthError>
-                {errors.email}
-              </AuthError>
+              <AuthError>{errors.email}</AuthError>
             </label>
           </AuthGroup>
 
@@ -117,7 +115,7 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
               <AuthLabel>Password</AuthLabel>
               <AuthInput
                 name="password"
-                type ="password"
+                type="password"
                 onChange={this.onChange}
                 value={this.state.password}
                 error={errors.password}

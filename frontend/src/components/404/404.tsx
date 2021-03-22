@@ -5,7 +5,7 @@ import NotFoundWrapper from "./404StyledComponents";
 const NotFound = () => {
   return (
     <NotFoundWrapper>
-      <Link to="/dashboard">
+      <Link to="/">
         <b>404</b>
       </Link>
       <br />

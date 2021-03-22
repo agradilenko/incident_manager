@@ -4,15 +4,15 @@ import { logoutUser } from "../../actions/authActions";
 import { getIncidents } from "../../actions/incidentsActions";
 import IncidentList from "../incidents-list/IncidentList";
 import "antd/dist/antd.css";
-
+import CollectionsPage from "../modal-create-incident/ModalCreateIncidentWrapper";
 
 interface AuthInterface {
   isAuthenticated: boolean;
 }
 
 interface IProps {
-  logoutUser: () => void
-  getIncidents: () => void
+  logoutUser: () => void;
+  getIncidents: () => void;
 }
 interface IState {}
 
@@ -42,6 +42,7 @@ class Dashboard extends Component<IProps, IState> {
         >
           Logout
         </button>
+        <CollectionsPage />
       </div>
     );
   }

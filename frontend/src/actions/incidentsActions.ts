@@ -9,21 +9,20 @@ import {
 } from "./types";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import {History} from "history";
+import { History } from "history";
 
 type Incident = {
-  area: string,
-  assignee?: string,
-  dateCreated: string,
-  dateDue: string,
-  description: string,
-  name: string,
-  priority: string,
-  status: string,
-  __v: number,
-  _id: string
-}
-
+  area: string;
+  assignee?: string;
+  dateCreated: string;
+  dateDue: string;
+  description: string;
+  name: string;
+  priority: string;
+  status: string;
+  __v: number;
+  _id: string;
+};
 
 // Create Incident
 export const createIncident = (incidentData: Incident) => (
@@ -56,7 +55,7 @@ export const updateIncident = (incidentData: Incident) => (
 };
 
 // Delete Incident
-export const deleteIncident = (id: number | string, history: History ) => (
+export const deleteIncident = (id: number | string) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   axios
@@ -67,7 +66,6 @@ export const deleteIncident = (id: number | string, history: History ) => (
         payload: id,
       })
     )
-    .then((res) => history.push("/dashboard"))
     .catch((err) => console.log(err));
 };
 
