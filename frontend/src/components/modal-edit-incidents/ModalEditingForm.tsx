@@ -1,7 +1,7 @@
 import React, {FunctionComponent, useEffect, useState} from "react";
 import {Button} from "antd";
 import {connect} from "react-redux";
-import {updateIncident} from "../../actions/incidentsActions";
+import {updateIncident, getIncidents} from "../../actions/incidentsActions";
 import {withRouter} from "react-router-dom";
 import {SimpleMap} from "../../../../simple-map";
 import {getUsersList} from "../../actions/authActions";
@@ -29,6 +29,7 @@ interface userListInterface {
 
 interface CollectionsPageProps {
   updateIncident: (incident: SimpleMap<any>) => void;
+  getIncidents: () => void;
   getUsersList: () => void;
   userList: userListInterface[];
   item: Incident
@@ -59,6 +60,7 @@ const EditIncidentFormWrapper: FunctionComponent<any> = (
       dateDue: values.dateDue.format(dateFormat),
     };
     props.updateIncident(resultData);
+    props.getIncidents();
     setVisible(false);
   };
 
@@ -96,5 +98,5 @@ const mapStateToProps = (state: {
 
 export default connect(mapStateToProps, {
   updateIncident,
-  getUsersList,
+  getUsersList, getIncidents
 })(withRouter(EditIncidentFormWrapper));

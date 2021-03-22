@@ -112,7 +112,7 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
               key: "action",
               render: (data: any, item: any) => {
                 return (
-                  <span>
+                  <div style={{display: "flex", flexDirection: "row"}}>
                     <Button
                       onClick={() => {
                         this.props.deleteIncident(item._id);
@@ -120,7 +120,7 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
                       icon={<DeleteOutlined />}
                     />
                     <EditIncidentFormWrapper item={item} />
-                  </span>
+                  </div>
                 );
               },
             },

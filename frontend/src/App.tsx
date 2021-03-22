@@ -15,9 +15,6 @@ import "./App.css";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
-import AddIncidentFormWrapper
-  from "./components/modal-create-incident/ModalCreateIncidentWrapper";
-import NotFound from "./components/404/404";
 
 
 
@@ -59,8 +56,6 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/test" component={AddIncidentFormWrapper} />
-          <Route exact path="/t" component={NotFound} />
 
         </div>
       </Router>

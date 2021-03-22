@@ -3,8 +3,20 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { getIncidents } from "../../actions/incidentsActions";
 import IncidentList from "../incidents-list/IncidentList";
+import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import AddIncidentFormWrapper from "../modal-create-incident/ModalCreateIncidentWrapper";
+import {
+  BrandHeader,
+  BrandHeaderSub,
+  DashBoardContentContainer,
+  DashBoardHeader,
+  DashBoardWrapper,
+  IncidentListContainer,
+  LeftTopNav,
+  LogoutButton,
+  RightTopNav,
+} from "./DashBoardStyled";
 
 interface AuthInterface {
   isAuthenticated: boolean;
@@ -28,22 +40,27 @@ class Dashboard extends Component<IProps, IState> {
 
   render() {
     return (
-      <div>
-        <IncidentList />
-
-        <button
-          style={{
-            width: "150px",
-            borderRadius: "3px",
-            letterSpacing: "1.5px",
-            marginTop: "1rem",
-          }}
-          onClick={this.onLogoutClick}
-        >
-          Logout
-        </button>
-        <AddIncidentFormWrapper />
-      </div>
+      <DashBoardWrapper>
+        <DashBoardHeader>
+          <LeftTopNav>
+            <Link to="/dashboard">
+              <BrandHeader>
+                Incident Manager
+                <BrandHeaderSub>by Gradilenko Artem</BrandHeaderSub>
+              </BrandHeader>
+            </Link>
+          </LeftTopNav>
+          <RightTopNav>
+            <LogoutButton onClick={this.onLogoutClick}>Logout</LogoutButton>
+          </RightTopNav>
+        </DashBoardHeader>
+        <DashBoardContentContainer>
+          <IncidentListContainer>
+            <IncidentList />
+            <AddIncidentFormWrapper />
+          </IncidentListContainer>
+        </DashBoardContentContainer>
+      </DashBoardWrapper>
     );
   }
 }

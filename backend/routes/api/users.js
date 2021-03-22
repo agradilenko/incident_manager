@@ -57,7 +57,7 @@ router.post("/register", (req, res) => {
 // @access Private
 router.get(
   "/",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     User.find().then((user) => res.json(user.map(u=>({name: u.name}))));
   }
