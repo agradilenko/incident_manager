@@ -80,7 +80,7 @@ router.patch(
     incidentFields.priority = req.body.priority;
 
     Incident.findOneAndUpdate(
-      { _id: req.body.id },
+      { _id: req.body._id },
       { $set: incidentFields },
       { new: true }
     )

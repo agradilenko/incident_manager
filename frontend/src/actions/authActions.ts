@@ -39,7 +39,6 @@ export const registerUser = (userData: registerUserData, history: History) => (
         payload: err.response.data,
       })
     );
-  console.log(userData);
 };
 
 // Login - get user token
@@ -96,13 +95,6 @@ export const setCurrentUser = (decoded: object) => {
   return {
     type: SET_CURRENT_USER,
     payload: decoded,
-  };
-};
-
-// User loading
-export const setUserLoading = () => {
-  return {
-    type: USER_LOADING,
   };
 };
 

@@ -3,7 +3,7 @@ import { Button } from "antd";
 import { connect } from "react-redux";
 import { createIncident } from "../../actions/incidentsActions";
 import { withRouter } from "react-router-dom";
-import { CollectionCreateForm, dateFormat } from "./ModalCreateIncident";
+import { IncidentCreateForm, dateFormat } from "./ModalCreateIncident";
 import { SimpleMap } from "../../../../simple-map";
 import { getUsersList } from "../../actions/authActions";
 
@@ -25,7 +25,7 @@ interface userListInterface {
   value: string;
 }
 
-interface CollectionsPageProps {
+interface IncidentsPageProps {
   createIncident: (incident: SimpleMap<any>) => void;
   getUsersList: () => void;
   userList: userListInterface[];
@@ -36,25 +36,20 @@ interface authInterface {
   userList: userListInterface[];
 }
 
-const CollectionsPage: FunctionComponent<any> = (
-  props: CollectionsPageProps
+const AddIncidentFormWrapper: FunctionComponent<any> = (
+  props: IncidentsPageProps
 ) => {
   const [visible, setVisible] = useState(false);
   const { getUsersList, userList } = props;
 
   useEffect(() => {
     getUsersList();
-    return () => {
-      console.log(userList);
-    };
   }, []);
-
-  console.log(userList);
 
   const onCreate = (values: any) => {
     const resultData: SimpleMap<any> = {
       ...values,
-      dateDue: values.DateDue.format(dateFormat),
+      dateDue: values.dateDue.format(dateFormat),
     };
     props.createIncident(resultData);
     setVisible(false);
@@ -70,7 +65,7 @@ const CollectionsPage: FunctionComponent<any> = (
       >
         New Incident
       </Button>
-      <CollectionCreateForm
+      <IncidentCreateForm
         userNames={userList}
         visible={visible}
         onCreate={onCreate}
@@ -94,4 +89,4 @@ const mapStateToProps = (state: {
 export default connect(mapStateToProps, {
   createIncident,
   getUsersList,
-})(withRouter(CollectionsPage));
+})(withRouter(AddIncidentFormWrapper));

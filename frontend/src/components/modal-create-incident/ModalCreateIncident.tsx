@@ -7,21 +7,21 @@ export const dateFormat = "DD.MM.YYYY";
 type DataType = {
   area: string;
   assignee?: string;
-  DateDue: object;
+  dateDue: object;
   description: string;
   name: string;
   priority: string;
   status: string;
 };
 
-interface CollectionCreateFormProps {
+interface IncidentCreateFormProps {
   visible: boolean;
   onCreate: (data: DataType) => void;
   onCancel: () => void;
   userNames: any;
 }
 
-const CollectionCreateForm = (props: CollectionCreateFormProps) => {
+const IncidentCreateForm = (props: IncidentCreateFormProps) => {
   const { visible, onCreate, onCancel, userNames } = props;
   const [form] = Form.useForm();
   const { Option } = Select;
@@ -44,7 +44,6 @@ const CollectionCreateForm = (props: CollectionCreateFormProps) => {
         form
           .validateFields()
           .then((values) => {
-            console.log(values);
             form.resetFields();
             onCreate(values);
           })
@@ -106,7 +105,7 @@ const CollectionCreateForm = (props: CollectionCreateFormProps) => {
           </Select>
         </Form.Item>
         <Form.Item
-          name="DateDue"
+          name="dateDue"
           label="Due Date"
           rules={[
             {
@@ -162,4 +161,4 @@ const CollectionCreateForm = (props: CollectionCreateFormProps) => {
   );
 };
 
-export { CollectionCreateForm };
+export { IncidentCreateForm };

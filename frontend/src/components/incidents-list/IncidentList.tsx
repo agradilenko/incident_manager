@@ -3,9 +3,13 @@ import { Button, Table } from "antd";
 import { connect } from "react-redux";
 import "./IncidentList.css";
 import moment from "moment";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { deleteIncident } from "../../actions/incidentsActions";
-import { log } from "util";
+import {IncidentCreateForm} from "../modal-create-incident/ModalCreateIncident";
+import {IncidentEditForm} from "../modal-edit-incidents/ModalEditIncident";
+import AddIncidentFormWrapper
+  from "../modal-create-incident/ModalCreateIncidentWrapper";
+import EditIncidentFormWrapper from "../modal-edit-incidents/ModalEditingForm";
 
 type Incident = {
   area: string;
@@ -27,6 +31,7 @@ interface IncidentListProps {
 
 interface IncidentListState {
   hasData: boolean;
+  incident: object
 }
 
 class IncidentList extends Component<IncidentListProps, IncidentListState> {
@@ -34,7 +39,13 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
     super(props);
     this.state = {
       hasData: true,
+      incident: {},
     };
+  }
+
+  openEditDrawer = (incident: any) => {
+    this.setState({incident: incident})
+
   }
 
   render() {
@@ -69,7 +80,7 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
               },
             },
             {
-              title: "DueDate",
+              title: "dateDue",
               dataIndex: "dateDue",
               key: "dateDue",
             },
@@ -108,6 +119,7 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
                       }}
                       icon={<DeleteOutlined />}
                     />
+                    <EditIncidentFormWrapper item={item} />
                   </span>
                 );
               },
@@ -116,6 +128,7 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
           dataSource={this.state.hasData ? incidents : null}
         />
       </div>
+
     );
   }
 }
