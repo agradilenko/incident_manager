@@ -3,7 +3,7 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, GET_USERS } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, GET_USERS } from "./types";
 import { History } from "history";
 
 interface JWTDeCode {
@@ -106,7 +106,7 @@ export const logoutUser = () => (
   localStorage.removeItem("jwtToken");
   // Remove auth header for future requests
   setAuthToken(false);
-  window.location.href = "./login";
-  // Set current user to empty object {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
+  window.location.href = "./";
+  // Set current user to empty object {} which will set isAuthenticated to false
 };

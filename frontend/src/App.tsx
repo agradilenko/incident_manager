@@ -16,37 +16,34 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 
+// interface JWTDeCode {
+//   id: string;
+//   email: string;
+//   iat: number;
+//   exp: number;
+// }
 
-
-interface JWTDeCode {
-  id: string;
-  email: string;
-  iat: number;
-  exp: number;
-}
-
-// Check for token to keep user logged in
-if (localStorage.jwtTokenTeams) {
-  // Set auth token header auth
-  const token = JSON.parse(localStorage.jwtTokenTeams);
-  setAuthToken(token);
-
-  // Decode token and get user info and exp
-  const decoded: JWTDeCode = jwt_decode(token);
-
-  // Set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
-
-  // Check for expired token
-  const currentTime = Date.now() / 1000; // to get in milliseconds
-  if (decoded.exp < currentTime) {
-    // Logout user
-    // @ts-ignore
-    store.dispatch(logoutUser());
-    // Redirect to login
-    window.location.href = "./";
-  }
-}
+// // Check for token to keep user logged in
+// if (localStorage.jwtTokenTeams) {
+//   // Set auth token header auth
+//   const token = JSON.parse(localStorage.jwtTokenTeams);
+//   setAuthToken(token);
+//
+//   // Decode token and get user info and exp
+//   const decoded: JWTDeCode = jwt_decode(token);
+//
+//   // Set user and isAuthenticated
+//   store.dispatch(setCurrentUser(decoded));
+//
+//   // Check for expired token
+//   const currentTime = Date.now() / 1000; // to get in milliseconds
+//   if (decoded.exp < currentTime) {
+//     // Logout user
+//     store.dispatch(logoutUser());
+//     // Redirect to login
+//     window.location.href = "./";
+//   }
+// }
 
 function App() {
   return (
@@ -56,7 +53,6 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/dashboard" component={Dashboard} />
-
         </div>
       </Router>
     </Provider>

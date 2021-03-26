@@ -15,28 +15,12 @@ import {
   BaseWrapper,
   BottomGroup,
 } from "./AuthStyledComponents";
-
-interface AuthInterface {
-  isAuthenticated: boolean;
-}
-
-interface ErrorInterface {
-  email?: string;
-  password?: string;
-  passwordincorrect?: string;
-}
-
-interface LoginProps {
-  errors: ErrorInterface;
-  auth: AuthInterface;
-  loginUser: (arg0: { email: string; password: string }) => void;
-}
-
-interface LoginState {
-  email: string;
-  password: string;
-  errors: ErrorInterface;
-}
+import {
+  AuthInterface,
+  ErrorInterface,
+  LoginProps,
+  LoginState,
+} from "./LoginInterfaces";
 
 class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
   state: LoginState;
@@ -71,9 +55,12 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
     }
   }
 
-  onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // @ts-ignore
-    this.setState({ [e.target.name]: e.currentTarget.value });
+  onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ email: e.currentTarget.value });
+  };
+
+  onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ password: e.currentTarget.value });
   };
 
   onSubmit = (
@@ -102,7 +89,7 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
               <AuthLabel>Email address</AuthLabel>
               <AuthInput
                 name="email"
-                onChange={this.onChange}
+                onChange={this.onChangeEmail}
                 value={this.state.email}
                 error={errors.email}
               />
@@ -116,7 +103,7 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
               <AuthInput
                 name="password"
                 type="password"
-                onChange={this.onChange}
+                onChange={this.onChangePassword}
                 value={this.state.password}
                 error={errors.password}
               />

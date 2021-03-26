@@ -2,26 +2,25 @@ import React, { Component } from "react";
 import { Button, Table } from "antd";
 import { connect } from "react-redux";
 import "./IncidentList.css";
-import moment from "moment";
+import moment, {Moment} from "moment";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { deleteIncident } from "../../actions/incidentsActions";
-import {IncidentCreateForm} from "../modal-create-incident/ModalCreateIncident";
-import {IncidentEditForm} from "../modal-edit-incidents/ModalEditIncident";
-import AddIncidentFormWrapper
-  from "../modal-create-incident/ModalCreateIncidentWrapper";
+import { IncidentCreateForm } from "../modal-create-incident/ModalCreateIncident";
+import { IncidentEditForm } from "../modal-edit-incidents/ModalEditIncident";
+import AddIncidentFormWrapper from "../modal-create-incident/ModalCreateIncidentWrapper";
 import EditIncidentFormWrapper from "../modal-edit-incidents/ModalEditingForm";
 
 type Incident = {
-  area: string;
+  area?: string;
   assignee?: string;
-  dateCreated: string;
-  dateDue: string;
-  description: string;
-  name: string;
-  priority: string;
-  status: string;
-  __v: number;
-  _id: string;
+  dateCreated?: string;
+  dateDue?: string | Moment;
+  description?: string;
+  name?: string;
+  priority?: string;
+  status?: string;
+  __v?: number;
+  _id?: string;
 };
 
 interface IncidentListProps {
@@ -31,7 +30,7 @@ interface IncidentListProps {
 
 interface IncidentListState {
   hasData: boolean;
-  incident: object
+  incident: Incident;
 }
 
 class IncidentList extends Component<IncidentListProps, IncidentListState> {
@@ -44,9 +43,8 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
   }
 
   openEditDrawer = (incident: any) => {
-    this.setState({incident: incident})
-
-  }
+    this.setState({ incident: incident });
+  };
 
   render() {
     // @ts-ignore
@@ -83,6 +81,14 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
               title: "dateDue",
               dataIndex: "dateDue",
               key: "dateDue",
+              render: (data: any, item: Incident) => {
+                if(typeof item.dateDue == "string")
+                {
+                  return item.dateDue
+                }
+                else
+                  return moment(item.dateDue).format("DD.MM.YYYY");
+              },
             },
             {
               title: "Description",
@@ -112,7 +118,7 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
               key: "action",
               render: (data: any, item: any) => {
                 return (
-                  <div style={{display: "flex", flexDirection: "row"}}>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
                     <Button
                       onClick={() => {
                         this.props.deleteIncident(item._id);
@@ -128,7 +134,6 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
           dataSource={this.state.hasData ? incidents : null}
         />
       </div>
-
     );
   }
 }

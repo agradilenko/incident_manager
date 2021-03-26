@@ -12,7 +12,16 @@ interface IncidentState {
 }
 
 interface Incident {
-  _id: string | number;
+  area: string;
+  assignee?: string;
+  dateCreated: string;
+  dateDue: string;
+  description: string;
+  name: string;
+  priority: string;
+  status: string;
+  __v: number;
+  _id: string;
 }
 
 const initialState: IncidentState = {

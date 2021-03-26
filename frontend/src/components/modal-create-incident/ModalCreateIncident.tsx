@@ -1,7 +1,7 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { Modal, Form, Input, Select, DatePicker } from "antd";
-import moment from "moment";
+import moment, { Moment } from "moment";
 export const dateFormat = "DD.MM.YYYY";
 
 type DataType = {
@@ -26,8 +26,8 @@ const IncidentCreateForm = (props: IncidentCreateFormProps) => {
   const [form] = Form.useForm();
   const { Option } = Select;
 
-  function disabledDate(current: object) {
-    // any потому что возвращается
+  function disabledDate(current: Moment) {
+    // object потому что возвращается
     // моментовский объект с очень сложной структурой
     // Can not select days before today and today
     return current && current < moment().endOf("day");

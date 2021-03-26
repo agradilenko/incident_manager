@@ -1,7 +1,8 @@
 import React from "react";
 import "antd/dist/antd.css";
-import { Modal, Form, Input, Select, DatePicker } from "antd";
+import { DatePicker, Form, Input, Modal, Select } from "antd";
 import moment from "moment";
+
 export const dateFormat = "DD.MM.YYYY";
 
 type DataType = {
@@ -18,7 +19,7 @@ type Incident = {
   area: string;
   assignee?: string;
   dateCreated: string;
-  dateDue: string| object;
+  dateDue: string | object;
   description: string;
   name: string;
   priority: string;
@@ -27,11 +28,16 @@ type Incident = {
   _id: string;
 };
 
+type userNames = {
+  title: string;
+  value: string;
+};
+
 interface IncidentEditFormProps {
   visible: boolean;
   onCreate: (data: DataType) => void;
   onCancel: () => void;
-  userNames: any;
+  userNames: userNames[];
   initialValues: Incident;
 }
 
@@ -40,13 +46,9 @@ const IncidentEditForm = (props: IncidentEditFormProps) => {
   const [form] = Form.useForm();
   const { Option } = Select;
 
-  function disabledDate(current: object) {
-    // any потому что возвращается
-    // моментовский объект с очень сложной структурой
-    // Can not select days before today and today
+  function disabledDate(current: object): boolean {
     return current && current < moment().endOf("day");
   }
-
   return (
     <Modal
       visible={visible}

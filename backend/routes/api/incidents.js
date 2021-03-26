@@ -9,7 +9,7 @@ const Incident = require("../../models/Incident");
 // @access Private
 router.post(
   "/create",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const newIncident = await new Incident({
       name: req.body.name,
@@ -30,7 +30,7 @@ router.post(
 // @access Private
 router.get(
   "/",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     Incident.find().then((incident) => res.json(incident));
   }
@@ -41,7 +41,7 @@ router.get(
 // @access Private
 router.get(
   "/:id",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     let id = req.params.id;
 
@@ -54,7 +54,7 @@ router.get(
 // @access Private
 router.delete(
   "/delete/:id",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Incident.findById(req.params.id).then((incident) => {
       incident.remove().then(() => res.json({ success: true }));
@@ -67,7 +67,7 @@ router.delete(
 // @access Private
 router.patch(
   "/update",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     let incidentFields = {};
 

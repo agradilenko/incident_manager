@@ -15,44 +15,13 @@ import {
   BaseWrapper,
   BottomGroup,
 } from "./AuthStyledComponents";
-import { History } from "history";
 import { compose } from "redux";
-
-interface AuthInterface {
-  isAuthenticated: boolean;
-}
-
-interface RegisterState {
-  name: string;
-  email: string;
-  password: string;
-  password2: string;
-  position: string;
-  errors: ErrorInterface;
-}
-
-interface ErrorInterface {
-  name?: string;
-  email?: string;
-  position?: string;
-  password?: string;
-  password2?: string;
-}
-
-interface RegisterProps {
-  errors: ErrorInterface;
-  auth: AuthInterface;
-  registerUser: (
-    arg0: {
-      name: string;
-      email: string;
-      position: string;
-      password: string;
-      password2: string;
-    },
-    arg1: History<unknown>
-  ) => void;
-}
+import {
+  AuthInterface,
+  ErrorInterface,
+  RegisterProps,
+  RegisterState,
+} from "./RegisterInterfaces";
 
 class Register extends Component<
   RegisterProps & Route & RouteComponentProps,
@@ -85,10 +54,24 @@ class Register extends Component<
     }
   }
 
-  onChange = (e: React.SyntheticEvent) => {
-    // @ts-ignore
+  onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ name: e.currentTarget.value });
+  };
 
-    this.setState({ [e.target.name]: e.target.value });
+  onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ email: e.currentTarget.value });
+  };
+
+  onChangePosition = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ position: e.currentTarget.value });
+  };
+
+  onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ password: e.currentTarget.value });
+  };
+
+  onChangePassword2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ password2: e.currentTarget.value });
   };
 
   onSubmit = (
@@ -107,7 +90,6 @@ class Register extends Component<
     this.props.registerUser(newUser, this.props.history);
   };
 
-  // class Register extends Component {
   render() {
     const { errors } = this.state;
     console.log(errors);
@@ -121,7 +103,7 @@ class Register extends Component<
               <AuthLabel>Name</AuthLabel>
               <AuthInput
                 name="name"
-                onChange={this.onChange}
+                onChange={this.onChangeName}
                 value={this.state.name}
                 error={errors.name}
               />
@@ -133,7 +115,7 @@ class Register extends Component<
               <AuthLabel>Email address</AuthLabel>
               <AuthInput
                 name="email"
-                onChange={this.onChange}
+                onChange={this.onChangeEmail}
                 value={this.state.email}
                 error={errors.email}
               />
@@ -145,7 +127,7 @@ class Register extends Component<
               <AuthLabel>Position</AuthLabel>
               <AuthInput
                 name="position"
-                onChange={this.onChange}
+                onChange={this.onChangePosition}
                 value={this.state.position}
                 error={errors.position}
               />
@@ -157,7 +139,7 @@ class Register extends Component<
               <AuthLabel>Password</AuthLabel>
               <AuthInput
                 name="password"
-                onChange={this.onChange}
+                onChange={this.onChangePassword}
                 value={this.state.password}
                 error={errors.password}
               />
@@ -169,7 +151,7 @@ class Register extends Component<
               <AuthLabel>Confirm Password</AuthLabel>
               <AuthInput
                 name="password2"
-                onChange={this.onChange}
+                onChange={this.onChangePassword2}
                 value={this.state.password2}
                 error={errors.password2}
               />

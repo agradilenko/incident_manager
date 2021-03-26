@@ -14,7 +14,7 @@ module.exports = function validateRegisterInput(data) {
   // Name checks
   if (Validator.isEmpty(data.name)) {
     errors.name = "Name field is required";
-  } else if (!Validator.isAlpha(data.name, 'en-US')) {
+  } else if (!Validator.isAlpha(data.name, "en-US")) {
     errors.name = "Name must contains only letters (a-zA-Z).";
   }
 

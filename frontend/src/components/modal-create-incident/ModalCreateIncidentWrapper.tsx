@@ -78,11 +78,11 @@ const AddIncidentFormWrapper: FunctionComponent<any> = (
 };
 
 const mapStateToProps = (state: {
+  auth: any;
   userList: authInterface;
   incident: Incident;
 }) => ({
   incident: state.incident,
-  // @ts-ignore
   userList: state.auth.usersNames,
 });
 

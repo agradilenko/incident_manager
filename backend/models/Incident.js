@@ -5,35 +5,35 @@ const Schema = mongoose.Schema;
 const IncidentSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
-  area : {
+  area: {
     type: String,
-    required: true
+    required: true,
   },
   dateCreated: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   dateDue: {
     type: String,
-    required: true
+    required: true,
   },
   assignee: {
-    type: String
+    type: String,
   },
   status: {
     type: String,
-    required: true
+    required: true,
   },
   priority: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 module.exports = Incident = mongoose.model("incidents", IncidentSchema);

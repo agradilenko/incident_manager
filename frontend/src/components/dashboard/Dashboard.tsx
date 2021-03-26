@@ -22,6 +22,19 @@ interface AuthInterface {
   isAuthenticated: boolean;
 }
 
+type Incident = {
+  area: string;
+  assignee?: string;
+  dateCreated: string;
+  dateDue: string;
+  description: string;
+  name: string;
+  priority: string;
+  status: string;
+  __v: number;
+  _id: string;
+};
+
 interface IProps {
   logoutUser: () => void;
   getIncidents: () => void;
@@ -65,7 +78,10 @@ class Dashboard extends Component<IProps, IState> {
   }
 }
 
-const mapStateToProps = (state: { auth: AuthInterface; incidents: [{}] }) => ({
+const mapStateToProps = (state: {
+  auth: AuthInterface;
+  incidents: Incident[];
+}) => ({
   auth: state.auth,
   incidents: state.incidents,
 });

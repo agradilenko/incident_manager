@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const NotFoundWrapper = styled.div `
+const NotFoundWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,23 +8,23 @@ const NotFoundWrapper = styled.div `
   height: 100vh;
   width: 80%;
   margin: 0 auto;
-  font-family:"Oxygen Mono", monospace;;
+  font-family: "Oxygen Mono", monospace;
   text-align: center;
 
   a {
     width: 100px;
     padding: 1rem;
-    color:  #fff;
+    color: #fff;
     background: #fc466b; /* fallback for old browsers */
     background: -webkit-linear-gradient(
-        to right,
-        #3f5efb,
-        #fc466b
+      to right,
+      #3f5efb,
+      #fc466b
     ); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(
-        to right,
-        #3f5efb,
-        #fc466b
+      to right,
+      #3f5efb,
+      #fc466b
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border-radius: 0.5rem;
     animation: float 3s ease-in-out infinite;
@@ -56,6 +56,6 @@ const NotFoundWrapper = styled.div `
       font-size: 18px;
     }
   }
-`
+`;
 
 export default NotFoundWrapper;

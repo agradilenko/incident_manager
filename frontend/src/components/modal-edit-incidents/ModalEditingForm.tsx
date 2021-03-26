@@ -60,7 +60,6 @@ const EditIncidentFormWrapper: FunctionComponent<any> = (
       dateDue: values.dateDue.format(dateFormat),
     };
     props.updateIncident(resultData);
-    props.getIncidents();
     setVisible(false);
   };
 
@@ -88,11 +87,11 @@ const EditIncidentFormWrapper: FunctionComponent<any> = (
 };
 
 const mapStateToProps = (state: {
+  auth: any;
   userList: authInterface;
   incident: Incident;
 }) => ({
   incident: state.incident,
-  // @ts-ignore
   userList: state.auth.usersNames,
 });
 
