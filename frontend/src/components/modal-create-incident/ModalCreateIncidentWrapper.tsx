@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { createIncident } from "../../actions/incidentsActions";
 import { withRouter } from "react-router-dom";
 import { IncidentCreateForm, dateFormat } from "./ModalCreateIncident";
-import { SimpleMap } from "../../../../simple-map";
 import { getUsersList } from "../../actions/authActions";
+import {SimpleMap} from "../../utils/simple-map";
 
 type Incident = {
   area: string;

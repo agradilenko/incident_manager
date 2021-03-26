@@ -54,8 +54,7 @@ export default function (
       return {
         ...state,
         incidents: state.incidents.filter(
-          // @ts-ignore
-          (incident) => incident._id !== action.payload
+          (incident) => incident._id !== action.payload._id
         ),
       };
     case GET_INCIDENT:

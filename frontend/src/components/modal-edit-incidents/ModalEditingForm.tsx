@@ -3,11 +3,11 @@ import {Button} from "antd";
 import {connect} from "react-redux";
 import {updateIncident, getIncidents} from "../../actions/incidentsActions";
 import {withRouter} from "react-router-dom";
-import {SimpleMap} from "../../../../simple-map";
 import {getUsersList} from "../../actions/authActions";
 import {dateFormat, IncidentEditForm} from "./ModalEditIncident";
 import {EditOutlined} from "@ant-design/icons";
 import moment from "moment";
+import {SimpleMap} from "../../utils/simple-map";
 
 type Incident = {
   area: string;

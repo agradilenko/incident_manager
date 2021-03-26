@@ -39,8 +39,7 @@ if (localStorage.jwtTokenTeams) {
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
     // Logout user
-    // @ts-ignore
-    store.dispatch(logoutUser());
+    logoutUser()(store.dispatch);
     // Redirect to login
     window.location.href = "./";
   }
