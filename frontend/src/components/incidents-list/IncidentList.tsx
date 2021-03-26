@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Table } from "antd";
 import { connect } from "react-redux";
 import "./IncidentList.css";
-import moment, {Moment} from "moment";
+import moment, { Moment } from "moment";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { deleteIncident } from "../../actions/incidentsActions";
 import { IncidentCreateForm } from "../modal-create-incident/ModalCreateIncident";
@@ -29,26 +29,25 @@ interface IncidentListProps {
 }
 
 interface IncidentListState {
-  hasData: boolean;
   incident: Incident;
+  incidents: Incident[]
 }
 
 class IncidentList extends Component<IncidentListProps, IncidentListState> {
   constructor(props: IncidentListProps) {
     super(props);
     this.state = {
-      hasData: true,
+      incidents: [],
       incident: {},
     };
   }
 
-  openEditDrawer = (incident: any) => {
+  openEditDrawer = (incident: Incident) => {
     this.setState({ incident: incident });
   };
 
   render() {
-    // @ts-ignore
-    const { incidents } = this.props.incidents;
+    const { incidents } = this.props;
     console.log(incidents);
     return (
       <div>
@@ -73,7 +72,7 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
               title: "StartDate",
               dataIndex: "dateCreated",
               key: "dateCreated",
-              render: (data: any, item: Incident) => {
+              render: (data: string, item: Incident) => {
                 return moment(item.dateCreated).format("DD.MM.YYYY");
               },
             },
@@ -81,13 +80,10 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
               title: "dateDue",
               dataIndex: "dateDue",
               key: "dateDue",
-              render: (data: any, item: Incident) => {
-                if(typeof item.dateDue == "string")
-                {
-                  return item.dateDue
-                }
-                else
-                  return moment(item.dateDue).format("DD.MM.YYYY");
+              render: (data: string | Moment, item: Incident) => {
+                if (typeof item.dateDue == "string") {
+                  return item.dateDue;
+                } else return moment(item.dateDue).format("DD.MM.YYYY");
               },
             },
             {
@@ -131,15 +127,15 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
               },
             },
           ]}
-          dataSource={this.state.hasData ? incidents : null}
+          dataSource={incidents}
         />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: { incidents: Incident[] }) => ({
-  incidents: state.incidents,
+const mapStateToProps = (state: { incidents: { incidents: Incident[]; } }) => ({
+  incidents: state.incidents.incidents,
 });
 
 export default connect(mapStateToProps, { deleteIncident })(IncidentList);

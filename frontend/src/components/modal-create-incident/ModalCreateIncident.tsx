@@ -27,9 +27,6 @@ const IncidentCreateForm = (props: IncidentCreateFormProps) => {
   const { Option } = Select;
 
   function disabledDate(current: Moment) {
-    // object потому что возвращается
-    // моментовский объект с очень сложной структурой
-    // Can not select days before today and today
     return current && current < moment().endOf("day");
   }
 

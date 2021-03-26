@@ -103,7 +103,7 @@ export const logoutUser = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   // Remove token from local storage
-  localStorage.removeItem("jwtToken");
+  localStorage.removeItem("jwtTokenTeams");
   // Remove auth header for future requests
   setAuthToken(false);
   dispatch(setCurrentUser({}));
