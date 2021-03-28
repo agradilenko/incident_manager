@@ -6,7 +6,7 @@ const NotFound = () => {
   return (
     <NotFoundWrapper>
       <Link to="/">
-        <b>404</b>
+        <b>Error</b>
       </Link>
       <br />
       <p>The requested page was not found on our server.</p>

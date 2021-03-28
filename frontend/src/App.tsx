@@ -1,6 +1,7 @@
 // React
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter } from 'react-router-dom'
 
 // Utils
 import jwt_decode from "jwt-decode";
@@ -15,6 +16,7 @@ import "./App.css";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
+import NotFound from "./components/404/404";
 
 interface JWTDeCode {
   id: string;
@@ -48,13 +50,15 @@ if (localStorage.jwtTokenTeams) {
 function App() {
   return (
     <Provider store={store}>
-      <Router>
+      <HashRouter>
         <div>
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Route
+            exact path="/dashboard" component={localStorage.jwtTokenTeams ? Dashboard : NotFound}
+          />
         </div>
-      </Router>
+      </HashRouter>
     </Provider>
   );
 }

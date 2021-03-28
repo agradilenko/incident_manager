@@ -138,6 +138,7 @@ class Register extends Component<
             <label>
               <AuthLabel>Password</AuthLabel>
               <AuthInput
+                type="password"
                 name="password"
                 onChange={this.onChangePassword}
                 value={this.state.password}
@@ -150,6 +151,7 @@ class Register extends Component<
             <label>
               <AuthLabel>Confirm Password</AuthLabel>
               <AuthInput
+                type="password"
                 name="password2"
                 onChange={this.onChangePassword2}
                 value={this.state.password2}

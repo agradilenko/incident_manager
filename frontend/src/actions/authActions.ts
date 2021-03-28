@@ -32,7 +32,7 @@ export const registerUser = (userData: registerUserData, history: History) => (
 ) => {
   axios
     .post("/api/users/register", userData)
-    .then((res) => history.push("/login"))
+    .then((res) => history.push("/"))
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,
