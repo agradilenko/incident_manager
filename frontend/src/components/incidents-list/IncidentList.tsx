@@ -48,7 +48,6 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
 
   render() {
     const { incidents } = this.props;
-    console.log(incidents);
     return (
       <div>
         <Table

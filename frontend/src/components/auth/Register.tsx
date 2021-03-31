@@ -92,7 +92,6 @@ class Register extends Component<
 
   render() {
     const { errors } = this.state;
-    console.log(errors);
 
     return (
       <BaseWrapper>

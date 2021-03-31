@@ -4,6 +4,7 @@ import {
 } from "../actions/types";
 
 import isEmpty from "is-empty";
+import {Moment} from "moment";
 
 const initialState = {
   isAuthenticated: false,
@@ -12,10 +13,38 @@ const initialState = {
   loading: false,
 };
 
+interface PayloadIncident {
+  area: string,
+  assignee: string,
+  dateCreated: string,
+  dateDue: Moment | string,
+  description: string,
+  name: string,
+  priority: string,
+  status: string,
+  __v: number,
+  id: string
+}
+
+interface PayloadUser {
+  id: string;
+  name: string;
+  iat: number;
+  exp: number;
+}
+
+interface PayloadUserNames {
+  title: string,
+  value: string
+}
+
+
+
 export default function (
   state = initialState,
-  action: { type: string; payload: object }
+  action: { type: string; payload: PayloadUserNames[] | PayloadUser | PayloadIncident[] }
 ) {
+  console.log(action.payload)
   switch (action.type) {
     case SET_CURRENT_USER:
       return {

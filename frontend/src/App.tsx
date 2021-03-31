@@ -26,9 +26,10 @@ interface JWTDeCode {
 }
 
 // Check for token to keep user logged in
-if (localStorage.jwtTokenTeams) {
+if (localStorage.jwtToken) {
+  console.log(localStorage.jwtToken)
   // Set auth token header auth
-  const token = JSON.parse(localStorage.jwtTokenTeams);
+  const token = JSON.parse(localStorage.jwtToken);
   setAuthToken(token);
 
   // Decode token and get user info and exp
@@ -55,7 +56,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route
-            exact path="/dashboard" component={localStorage.jwtTokenTeams ? Dashboard : NotFound}
+            exact path="/dashboard" component={Dashboard}
           />
         </div>
       </HashRouter>

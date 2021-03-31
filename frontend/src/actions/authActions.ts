@@ -26,6 +26,13 @@ interface loginUserData {
   password: string;
 }
 
+interface Decoded {
+  exp?: number,
+  iat?: number,
+  id?: string,
+  name?: string
+}
+
 // Register User
 export const registerUser = (userData: registerUserData, history: History) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
@@ -51,7 +58,7 @@ export const loginUser = (userData: loginUserData) => (
       // Save to localStorage
       // Set token to localStorage
       const { token } = res.data;
-      localStorage.setItem("jwtToken", token);
+      localStorage.setItem("jwtToken", JSON.stringify(token));
       // Set token to Auth header
       setAuthToken(token);
       // Decode token to get user data
@@ -103,7 +110,7 @@ export const logoutUser = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   // Remove token from local storage
-  localStorage.removeItem("jwtTokenTeams");
+  localStorage.removeItem("jwtToken");
   // Remove auth header for future requests
   setAuthToken(false);
   dispatch(setCurrentUser({}));

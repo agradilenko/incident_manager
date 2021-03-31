@@ -78,7 +78,6 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
 
   render() {
     const { errors } = this.state;
-    console.log(errors);
 
     return (
       <BaseWrapper>
