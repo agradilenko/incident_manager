@@ -1,3 +1,3 @@
 export interface SimpleMap<T> {
-  [key: string]: T
+    [key: string]: T;
 }

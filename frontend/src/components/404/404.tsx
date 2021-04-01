@@ -5,7 +5,7 @@ import NotFoundWrapper from './404StyledComponents';
 const NotFound = () => {
     return (
         <NotFoundWrapper>
-            <Link to="/">
+            <Link to='/'>
                 <b>Error</b>
             </Link>
             <br />

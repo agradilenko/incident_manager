@@ -1,10 +1,10 @@
-import axios from "axios";
-import setAuthToken from "../utils/setAuthToken";
-import jwt_decode from "jwt-decode";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "redux";
-import { GET_ERRORS, SET_CURRENT_USER, GET_USERS } from "./types";
-import { History } from "history";
+import axios from 'axios';
+import setAuthToken from '../utils/setAuthToken';
+import jwt_decode from 'jwt-decode';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { GET_ERRORS, SET_CURRENT_USER, GET_USERS } from './types';
+import { History } from 'history';
 
 interface JWTDeCode {
   id?: string;
@@ -39,8 +39,8 @@ export const registerUser = (userData: registerUserData, history: History) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   axios
-    .post("/api/users/register", userData)
-    .then((res) => history.push("/"))
+    .post('/api/users/register', userData)
+    .then((res) => history.push('/'))
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,
@@ -54,12 +54,12 @@ export const loginUser = (userData: loginUserData) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   axios
-    .post("/api/users/login", userData)
+    .post('/api/users/login', userData)
     .then((res) => {
       // Save to localStorage
       // Set token to localStorage
       const { token } = res.data;
-      localStorage.setItem("jwtToken", JSON.stringify(token));
+      localStorage.setItem('jwtToken', JSON.stringify(token));
       // Set token to Auth header
       setAuthToken(token);
       // Decode token to get user data
@@ -80,7 +80,7 @@ export const getUsersList = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   axios
-    .get("/api/users")
+    .get('/api/users')
     .then((res) =>
       dispatch({
         type: GET_USERS,
@@ -111,10 +111,10 @@ export const logoutUser = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   // Remove token from local storage
-  localStorage.removeItem("jwtToken");
+  localStorage.removeItem('jwtToken');
   // Remove auth header for future requests
   setAuthToken(false);
   dispatch(setCurrentUser({}));
-  window.location.href = "./";
+  window.location.href = './';
   // Set current user to empty object {} which will set isAuthenticated to false
 };

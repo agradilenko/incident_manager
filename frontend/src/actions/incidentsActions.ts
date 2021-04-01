@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 import {
   CREATE_INCIDENT,
@@ -6,10 +6,10 @@ import {
   DELETE_INCIDENT,
   GET_INCIDENT,
   GET_INCIDENTS,
-} from "./types";
-import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from "redux";
-import { History } from "history";
+} from './types';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { History } from 'history';
 
 type Incident = {
   area: string;
@@ -29,7 +29,7 @@ export const createIncident = (incidentData: Incident) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   axios
-    .post("/api/incidents/create", incidentData)
+    .post('/api/incidents/create', incidentData)
     .then((res) =>
       dispatch({
         type: CREATE_INCIDENT,
@@ -44,7 +44,7 @@ export const updateIncident = (incidentData: Incident) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   axios
-    .patch("/api/incidents/update", incidentData)
+    .patch('/api/incidents/update', incidentData)
     .then((res) =>
       dispatch({
         type: UPDATE_INCIDENT,
@@ -96,7 +96,7 @@ export const getIncidents = () => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   axios
-    .get("/api/incidents")
+    .get('/api/incidents')
     .then((res) =>
       dispatch({
         type: GET_INCIDENTS,

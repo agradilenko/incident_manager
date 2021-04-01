@@ -10,7 +10,8 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "modules": true
-    }
+    },
+    "project": ["./tsconfig.json"]
   },
   "plugins": ["@typescript-eslint", "prettier", "react-hooks"],
   "rules": {

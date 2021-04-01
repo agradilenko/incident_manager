@@ -124,7 +124,7 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
                                         <Button
                                             onClick={() => {
                                                 this.props.deleteIncident(
-                                                    item._id
+                                                    item._id!
                                                 );
                                             }}
                                             icon={<DeleteOutlined />}
