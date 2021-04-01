@@ -31,18 +31,6 @@ interface IncidentListState {
 }
 
 class IncidentList extends Component<IncidentListProps, IncidentListState> {
-    constructor(props: IncidentListProps) {
-        super(props);
-        this.state = {
-            incidents: [],
-            incident: {}
-        };
-    }
-
-    openEditDrawer = (incident: Incident) => {
-        this.setState({ incident: incident });
-    };
-
     render() {
         const { incidents } = this.props;
         return (
@@ -68,23 +56,20 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
                             title: 'StartDate',
                             dataIndex: 'dateCreated',
                             key: 'dateCreated',
-                            render: (data: string, item: Incident) => {
-                                return moment(item.dateCreated).format(
-                                    'DD.MM.YYYY'
-                                );
-                            }
+                            render: (data: string, item: Incident) =>
+                                moment(item.dateCreated).format('DD.MM.YYYY')
                         },
                         {
                             title: 'dateDue',
                             dataIndex: 'dateDue',
                             key: 'dateDue',
                             render: (data: string | Moment, item: Incident) => {
-                                if (typeof item.dateDue == 'string') {
+                                if (typeof item.dateDue === 'string') {
                                     return item.dateDue;
-                                } else
-                                    return moment(item.dateDue).format(
-                                        'DD.MM.YYYY'
-                                    );
+                                }
+                                return moment(item.dateDue).format(
+                                    'DD.MM.YYYY'
+                                );
                             }
                         },
                         {
@@ -101,9 +86,9 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
                             title: 'Icon',
                             dataIndex: 'icon',
                             key: 'icon',
-                            render: (data: unknown, item: Incident) => {
-                                return <div className={item?.priority} />;
-                            }
+                            render: (data: unknown, item: Incident) => (
+                                <div className={item?.priority} />
+                            )
                         },
                         {
                             title: 'Status',
@@ -113,26 +98,25 @@ class IncidentList extends Component<IncidentListProps, IncidentListState> {
                         {
                             title: 'Action',
                             key: 'action',
-                            render: (data: unknown, item: Incident) => {
-                                return (
-                                    <div
-                                        style={{
-                                            display: 'flex',
-                                            flexDirection: 'row'
+                            render: (data: unknown, item: Incident) => (
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'row'
+                                    }}
+                                >
+                                    <Button
+                                        onClick={() => {
+                                            const {
+                                                deleteIncident: deleteIncident1
+                                            } = this.props;
+                                            deleteIncident1(item._id!);
                                         }}
-                                    >
-                                        <Button
-                                            onClick={() => {
-                                                this.props.deleteIncident(
-                                                    item._id!
-                                                );
-                                            }}
-                                            icon={<DeleteOutlined />}
-                                        />
-                                        <EditIncidentFormWrapper item={item} />
-                                    </div>
-                                );
-                            }
+                                        icon={<DeleteOutlined />}
+                                    />
+                                    <EditIncidentFormWrapper item={item} />
+                                </div>
+                            )
                         }
                     ]}
                     dataSource={incidents}

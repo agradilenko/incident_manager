@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Link, withRouter, Route } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { registerUser } from '../../actions/authActions';
 import {
     AuthButton,
@@ -11,11 +12,11 @@ import {
     AuthHeader,
     AuthInput,
     AuthLabel,
+    AuthLabelEmpty,
     AuthLink,
     BaseWrapper,
     BottomGroup
 } from './AuthStyledComponents';
-import { compose } from 'redux';
 import {
     AuthInterface,
     ErrorInterface,
@@ -41,12 +42,13 @@ class Register extends Component<
 
     componentDidMount() {
         // If logged in and user navigates to Register page, should redirect them to dashboard
-        if (this.props.auth.isAuthenticated) {
-            this.props.history.push('/dashboard');
+        const { history, auth } = this.props;
+        if (auth.isAuthenticated) {
+            history.push('/dashboard');
         }
     }
 
-    componentWillReceiveProps(nextProps: { errors: ErrorInterface }) {
+    UNSAFE_componentWillReceiveProps(nextProps: { errors: ErrorInterface }) {
         if (nextProps.errors) {
             this.setState({
                 errors: nextProps.errors
@@ -79,85 +81,87 @@ class Register extends Component<
     ) => {
         e.preventDefault();
 
+        const { password, position, email, name } = this.state;
         const newUser = {
-            name: this.state.name,
-            email: this.state.email,
-            position: this.state.position,
-            password: this.state.password,
-            password2: this.state.password
+            name,
+            email,
+            position,
+            password,
+            password2: password
         };
 
-        this.props.registerUser(newUser, this.props.history);
+        const { history, registerUser: registerUser1 } = this.props;
+        registerUser1(newUser, history);
     };
 
     render() {
         const { errors } = this.state;
-
+        const { name, email, position, password, password2 } = this.state;
         return (
             <BaseWrapper>
                 <AuthHeader>Register Below</AuthHeader>
                 <AuthForm noValidate onSubmit={this.onSubmit}>
                     <AuthGroup>
-                        <label>
+                        <AuthLabelEmpty>
                             <AuthLabel>Name</AuthLabel>
                             <AuthInput
                                 name="name"
                                 onChange={this.onChangeName}
-                                value={this.state.name}
+                                value={name}
                                 error={errors.name}
                             />
                             <AuthError>{errors.name}</AuthError>
-                        </label>
+                        </AuthLabelEmpty>
                     </AuthGroup>
                     <AuthGroup>
-                        <label>
+                        <AuthLabelEmpty>
                             <AuthLabel>Email address</AuthLabel>
                             <AuthInput
                                 name="email"
                                 onChange={this.onChangeEmail}
-                                value={this.state.email}
+                                value={email}
                                 error={errors.email}
                             />
                             <AuthError>{errors.email}</AuthError>
-                        </label>
+                        </AuthLabelEmpty>
                     </AuthGroup>
                     <AuthGroup>
-                        <label>
+                        <AuthLabelEmpty>
                             <AuthLabel>Position</AuthLabel>
                             <AuthInput
                                 name="position"
                                 onChange={this.onChangePosition}
-                                value={this.state.position}
+                                value={position}
                                 error={errors.position}
                             />
                             <AuthError>{errors.position}</AuthError>
-                        </label>
+                        </AuthLabelEmpty>
                     </AuthGroup>
                     <AuthGroup>
-                        <label>
+                        <AuthLabelEmpty>
                             <AuthLabel>Password</AuthLabel>
                             <AuthInput
                                 type="password"
                                 name="password"
                                 onChange={this.onChangePassword}
-                                value={this.state.password}
+                                value={password}
                                 error={errors.password}
                             />
                             <AuthError>{errors.password}</AuthError>
-                        </label>
+                        </AuthLabelEmpty>
                     </AuthGroup>
                     <AuthGroup>
-                        <label>
+                        <AuthLabelEmpty>
                             <AuthLabel>Confirm Password</AuthLabel>
                             <AuthInput
                                 type="password"
                                 name="password2"
                                 onChange={this.onChangePassword2}
-                                value={this.state.password2}
+                                value={password2}
                                 error={errors.password2}
                             />
                             <AuthError>{errors.password2}</AuthError>
-                        </label>
+                        </AuthLabelEmpty>
                     </AuthGroup>
                     <div>
                         <AuthButton type="submit">Sign up</AuthButton>

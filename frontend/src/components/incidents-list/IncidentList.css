@@ -1,4 +1,4 @@
-.high {
+.Blocker {
     margin: 0 auto;
     width: 15px;
     height: 15px;
@@ -6,20 +6,12 @@
     background: #f9012c;
 }
 
-.open {
+.Minor {
     margin: 0 auto;
     width: 15px;
     height: 15px;
     border-radius: 50%;
     background: #e3d10a;
-}
-
-.Normal {
-    margin: 0 auto;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: #34d81d;
 }
 
 .Major {

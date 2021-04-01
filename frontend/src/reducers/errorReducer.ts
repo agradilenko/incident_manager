@@ -12,7 +12,7 @@ interface PayloadError {
     value?: string;
 }
 
-export default function (
+export default function errorReducer(
     state = initialState,
     action: { type: string; payload: PayloadError[] }
 ) {

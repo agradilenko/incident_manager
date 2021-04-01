@@ -1,7 +1,6 @@
-import { GET_USERS, SET_CURRENT_USER } from '../actions/types';
-
 import isEmpty from 'is-empty';
 import { Moment } from 'moment';
+import { GET_USERS, SET_CURRENT_USER } from '../actions/types';
 
 const initialState = {
     isAuthenticated: false,
@@ -48,7 +47,7 @@ type SomeType =
     | PayloadIncident[]
     | JWTDeCode;
 
-export default function (
+export default function authReducer(
     state = initialState,
     action: { type: string; payload: SomeType }
 ) {

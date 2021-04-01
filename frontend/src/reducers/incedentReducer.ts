@@ -29,7 +29,7 @@ const initialState: IncidentState = {
     incident: []
 };
 
-export default function (
+export default function incedentReducer(
     state: IncidentState = initialState,
     action: { type: string; payload: { _id: string } }
 ) {
@@ -40,11 +40,12 @@ export default function (
                 incidents: [action.payload, ...state.incidents]
             };
         case UPDATE_INCIDENT:
-            let index = state.incidents.findIndex(
-                (incident: Incident) => incident._id === action.payload._id
+            state.incidents.splice(
+                state.incidents.findIndex(
+                    (incident: Incident) => incident._id === action.payload._id
+                ),
+                1
             );
-
-            state.incidents.splice(index, 1);
 
             return {
                 ...state,
@@ -53,9 +54,9 @@ export default function (
         case DELETE_INCIDENT:
             return {
                 ...state,
-                incidents: state.incidents.filter((incident) => {
-                    return incident._id !== action.payload._id;
-                })
+                incidents: state.incidents.filter(
+                    (incident) => incident._id !== action.payload._id
+                )
             };
         case GET_INCIDENT:
             return {

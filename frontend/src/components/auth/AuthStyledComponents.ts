@@ -72,6 +72,8 @@ const AuthError = styled.div`
     font-size: 14px;
 `;
 
+const AuthLabelEmpty = styled.label``;
+
 const AuthButton = styled.button`
     height: 40px;
     margin-top: 1rem;
@@ -126,5 +128,6 @@ export {
     AuthButton,
     AuthError,
     BottomGroup,
-    AuthLink
+    AuthLink,
+    AuthLabelEmpty
 };

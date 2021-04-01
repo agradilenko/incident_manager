@@ -32,7 +32,7 @@ interface RegisterProps {
             password: string;
             password2: string;
         },
-        arg1: History<unknown>
+        arg1: History<any>
     ) => void;
 }
 

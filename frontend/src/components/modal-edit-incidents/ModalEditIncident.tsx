@@ -28,7 +28,7 @@ type Incident = {
     _id: string;
 };
 
-type userNames = {
+type UserNames = {
     title: string;
     value: string;
 };
@@ -37,7 +37,7 @@ interface IncidentEditFormProps {
     visible: boolean;
     onCreate: (data: DataType) => void;
     onCancel: () => void;
-    userNames: userNames[];
+    userNames: UserNames[];
     initialValues: Incident;
 }
 
@@ -46,7 +46,7 @@ const IncidentEditForm = (props: IncidentEditFormProps) => {
     const [form] = Form.useForm();
     const { Option } = Select;
 
-    function disabledDate(current: object): boolean {
+    function disabledDate(current: Moment): boolean {
         return current && current < moment().endOf('day');
     }
     return (

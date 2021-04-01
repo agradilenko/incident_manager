@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions/authActions';
 import { RouteComponentProps } from 'react-router';
+import { loginUser } from '../../actions/authActions';
 import {
     AuthButton,
     AuthError,
@@ -13,7 +13,8 @@ import {
     AuthLabel,
     AuthLink,
     BaseWrapper,
-    BottomGroup
+    BottomGroup,
+    AuthLabelEmpty
 } from './AuthStyledComponents';
 import {
     AuthInterface,
@@ -23,7 +24,6 @@ import {
 } from './LoginInterfaces';
 
 class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
-    state: LoginState;
     constructor(props: LoginProps & RouteComponentProps) {
         super(props);
         this.state = {
@@ -35,17 +35,19 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
 
     componentDidMount() {
         // If logged in and user navigates to Login page, should redirect them to dashboard
-        if (this.props.auth.isAuthenticated) {
-            this.props.history.push('/dashboard');
+        const { history, auth } = this.props;
+        if (auth.isAuthenticated) {
+            history.push('/dashboard');
         }
     }
 
-    componentWillReceiveProps(nextProps: {
+    UNSAFE_componentWillReceiveProps(nextProps: {
         auth: { isAuthenticated: boolean };
         errors: ErrorInterface;
     }) {
         if (nextProps.auth.isAuthenticated) {
-            this.props.history.push('/dashboard');
+            const { history } = this.props;
+            history.push('/dashboard');
         }
 
         if (nextProps.errors) {
@@ -68,52 +70,55 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
     ) => {
         e.preventDefault();
 
+        const { password, email } = this.state;
         const userData = {
-            email: this.state.email,
-            password: this.state.password
+            email,
+            password
         };
 
-        this.props.loginUser(userData);
+        const { loginUser: loginUser1 } = this.props;
+        loginUser1(userData);
     };
 
     render() {
         const { errors } = this.state;
+        const { email, password } = this.state;
 
         return (
             <BaseWrapper>
                 <AuthHeader>Sign in </AuthHeader>
                 <AuthForm noValidate onSubmit={this.onSubmit}>
                     <AuthGroup>
-                        <label>
+                        <AuthLabelEmpty>
                             <AuthLabel>Email address</AuthLabel>
                             <AuthInput
                                 name="email"
                                 onChange={this.onChangeEmail}
-                                value={this.state.email}
+                                value={email}
                                 error={errors.email}
                             />
                             <AuthError>
                                 {errors.email}
                                 {errors.emailnotfound}
                             </AuthError>
-                        </label>
+                        </AuthLabelEmpty>
                     </AuthGroup>
 
                     <AuthGroup>
-                        <label>
+                        <AuthLabelEmpty>
                             <AuthLabel>Password</AuthLabel>
                             <AuthInput
                                 name="password"
                                 type="password"
                                 onChange={this.onChangePassword}
-                                value={this.state.password}
+                                value={password}
                                 error={errors.password}
                             />
                             <AuthError>
                                 {errors.password}
                                 {errors.passwordincorrect}
                             </AuthError>
-                        </label>
+                        </AuthLabelEmpty>
                     </AuthGroup>
 
                     <div>

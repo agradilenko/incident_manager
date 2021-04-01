@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { logoutUser } from '../../actions/authActions';
 import { getIncidents } from '../../actions/incidentsActions';
 import IncidentList from '../incidents-list/IncidentList';
-import { Link } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import AddIncidentFormWrapper from '../modal-create-incident/ModalCreateIncidentWrapper';
 import {
@@ -42,14 +42,16 @@ interface IProps {
 interface IState {}
 
 class Dashboard extends Component<IProps, IState> {
+    componentDidMount() {
+        const { getIncidents: getIncidents1 } = this.props;
+        getIncidents1();
+    }
+
     onLogoutClick = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        this.props.logoutUser();
+        const { logoutUser: logoutUser1 } = this.props;
+        logoutUser1();
     };
-
-    componentDidMount() {
-        this.props.getIncidents();
-    }
 
     render() {
         return (

@@ -2,6 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Modal, Form, Input, Select, DatePicker } from 'antd';
 import moment, { Moment } from 'moment';
+
 export const dateFormat = 'DD.MM.YYYY';
 
 type DataType = {
@@ -14,11 +15,16 @@ type DataType = {
     status: string;
 };
 
+interface UserNamesInterface {
+    title: string;
+    value: string;
+}
+
 interface IncidentCreateFormProps {
     visible: boolean;
     onCreate: (data: DataType) => void;
     onCancel: () => void;
-    userNames: any;
+    userNames: UserNamesInterface[];
 }
 
 const IncidentCreateForm = (props: IncidentCreateFormProps) => {

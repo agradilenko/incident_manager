@@ -1,15 +1,14 @@
 // React
 import React from 'react';
-import { Route, HashRouter } from 'react-router-dom';
+import { Route, HashRouter, Switch } from 'react-router-dom';
 
 // Redux
 import { Provider } from 'react-redux';
+import jwt_decode from 'jwt-decode';
 import store from './store';
 
 // Utils
-import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
-
 
 import { setCurrentUser, logoutUser } from './actions/authActions';
 
@@ -52,18 +51,20 @@ if (localStorage.jwtToken) {
     }
 }
 
+function Temp() {
+    return <>{localStorage.jwtToken ? <Dashboard /> : <NotFound />}</>;
+}
+
 function App() {
     return (
         <Provider store={store}>
             <HashRouter>
                 <div>
-                    <Route exact path='/' component={Login} />
-                    <Route exact path='/register' component={Register} />
-                    <Route
-                        exact
-                        path='/dashboard'
-                        component={localStorage.jwtToken ? Dashboard : NotFound}
-                    />
+                    <Switch>
+                        <Route path="/register" component={Register} />
+                        <Route path="/dashboard" component={Temp} />
+                        <Route exact path="/" component={Login} />
+                    </Switch>
                 </div>
             </HashRouter>
         </Provider>
