@@ -7,10 +7,11 @@ import { GET_ERRORS, SET_CURRENT_USER, GET_USERS } from "./types";
 import { History } from "history";
 
 interface JWTDeCode {
-  id: string;
-  email: string;
-  iat: number;
-  exp: number;
+  id?: string;
+  email?: string;
+  iat?: number;
+  exp?: number;
+  _id?: string;
 }
 
 interface registerUserData {
@@ -98,7 +99,7 @@ export const getUsersList = () => (
 };
 
 // Set logged in user
-export const setCurrentUser = (decoded: object) => {
+export const setCurrentUser = (decoded: JWTDeCode) => {
   return {
     type: SET_CURRENT_USER,
     payload: decoded,

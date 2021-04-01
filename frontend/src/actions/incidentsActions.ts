@@ -55,15 +55,17 @@ export const updateIncident = (incidentData: Incident) => (
 };
 
 // Delete Incident
-export const deleteIncident = (id: number | string) => (
+export const deleteIncident = (_id: string) => (
   dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
   axios
-    .delete(`/api/incidents/delete/${id}`)
+    .delete(`/api/incidents/delete/${_id}`)
     .then((res) =>
       dispatch({
         type: DELETE_INCIDENT,
-        payload: id,
+        payload: {
+          _id: _id
+        },
       })
     )
     .catch((err) => console.log(err));

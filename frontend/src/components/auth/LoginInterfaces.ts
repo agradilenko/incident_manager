@@ -6,6 +6,7 @@ interface ErrorInterface {
   email?: string;
   password?: string;
   passwordincorrect?: string;
+  emailnotfound?: string
 }
 
 interface LoginProps {

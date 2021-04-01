@@ -1,14 +1,14 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { DatePicker, Form, Input, Modal, Select } from "antd";
-import moment from "moment";
+import moment, {Moment} from "moment";
 
 export const dateFormat = "DD.MM.YYYY";
 
 type DataType = {
   area: string;
   assignee?: string;
-  dateDue: object;
+  dateDue: Moment;
   description: string;
   name: string;
   priority: string;

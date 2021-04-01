@@ -7,7 +7,7 @@ export const dateFormat = "DD.MM.YYYY";
 type DataType = {
   area: string;
   assignee?: string;
-  dateDue: object;
+  dateDue: Moment;
   description: string;
   name: string;
   priority: string;

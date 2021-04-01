@@ -26,6 +26,13 @@ interface PayloadIncident {
   id: string
 }
 
+interface JWTDeCode {
+  id: string;
+  email: string;
+  iat: number;
+  exp: number;
+}
+
 interface PayloadUser {
   id: string;
   name: string;
@@ -38,13 +45,12 @@ interface PayloadUserNames {
   value: string
 }
 
-
+type SomeType = PayloadUserNames[] | PayloadUser | PayloadIncident[] | JWTDeCode;
 
 export default function (
   state = initialState,
-  action: { type: string; payload: PayloadUserNames[] | PayloadUser | PayloadIncident[] }
+  action: { type: string; payload: SomeType }
 ) {
-  console.log(action.payload)
   switch (action.type) {
     case SET_CURRENT_USER:
       return {

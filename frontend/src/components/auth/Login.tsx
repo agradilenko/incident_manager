@@ -1,138 +1,141 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
-import { RouteComponentProps } from "react-router";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/authActions';
+import { RouteComponentProps } from 'react-router';
 import {
-  AuthButton,
-  AuthError,
-  AuthForm,
-  AuthGroup,
-  AuthHeader,
-  AuthInput,
-  AuthLabel,
-  AuthLink,
-  BaseWrapper,
-  BottomGroup,
-} from "./AuthStyledComponents";
+    AuthButton,
+    AuthError,
+    AuthForm,
+    AuthGroup,
+    AuthHeader,
+    AuthInput,
+    AuthLabel,
+    AuthLink,
+    BaseWrapper,
+    BottomGroup
+} from './AuthStyledComponents';
 import {
-  AuthInterface,
-  ErrorInterface,
-  LoginProps,
-  LoginState,
-} from "./LoginInterfaces";
+    AuthInterface,
+    ErrorInterface,
+    LoginProps,
+    LoginState
+} from './LoginInterfaces';
 
 class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
-  state: LoginState;
-  constructor(props: LoginProps & RouteComponentProps) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-      errors: {},
-    };
-  }
-
-  componentDidMount() {
-    // If logged in and user navigates to Login page, should redirect them to dashboard
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
-  }
-
-  componentWillReceiveProps(nextProps: {
-    auth: { isAuthenticated: boolean };
-    errors: ErrorInterface;
-  }) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+    state: LoginState;
+    constructor(props: LoginProps & RouteComponentProps) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            errors: {}
+        };
     }
 
-    if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors,
-      });
+    componentDidMount() {
+        // If logged in and user navigates to Login page, should redirect them to dashboard
+        if (this.props.auth.isAuthenticated) {
+            this.props.history.push('/dashboard');
+        }
     }
-  }
 
-  onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ email: e.currentTarget.value });
-  };
+    componentWillReceiveProps(nextProps: {
+        auth: { isAuthenticated: boolean };
+        errors: ErrorInterface;
+    }) {
+        if (nextProps.auth.isAuthenticated) {
+            this.props.history.push('/dashboard');
+        }
 
-  onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ password: e.currentTarget.value });
-  };
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
+    }
 
-  onSubmit = (
-    e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLFormElement>
-  ) => {
-    e.preventDefault();
-
-    const userData = {
-      email: this.state.email,
-      password: this.state.password,
+    onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ email: e.currentTarget.value });
     };
 
-    this.props.loginUser(userData);
-  };
+    onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ password: e.currentTarget.value });
+    };
 
-  render() {
-    const { errors } = this.state;
+    onSubmit = (
+        e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLFormElement>
+    ) => {
+        e.preventDefault();
 
-    return (
-      <BaseWrapper>
-        <AuthHeader>Sign in </AuthHeader>
-        <AuthForm noValidate onSubmit={this.onSubmit}>
-          <AuthGroup>
-            <label>
-              <AuthLabel>Email address</AuthLabel>
-              <AuthInput
-                name="email"
-                onChange={this.onChangeEmail}
-                value={this.state.email}
-                error={errors.email}
-              />
-              <AuthError>{errors.email}</AuthError>
-            </label>
-          </AuthGroup>
+        const userData = {
+            email: this.state.email,
+            password: this.state.password
+        };
 
-          <AuthGroup>
-            <label>
-              <AuthLabel>Password</AuthLabel>
-              <AuthInput
-                name="password"
-                type="password"
-                onChange={this.onChangePassword}
-                value={this.state.password}
-                error={errors.password}
-              />
-              <AuthError>
-                {errors.password}
-                {errors.passwordincorrect}
-              </AuthError>
-            </label>
-          </AuthGroup>
+        this.props.loginUser(userData);
+    };
 
-          <div>
-            <AuthButton type="submit">Login</AuthButton>
-          </div>
-          <BottomGroup>
-            <AuthLink>
-              <Link to="/register">Sign up</Link>
-            </AuthLink>
-          </BottomGroup>
-        </AuthForm>
-      </BaseWrapper>
-    );
-  }
+    render() {
+        const { errors } = this.state;
+
+        return (
+            <BaseWrapper>
+                <AuthHeader>Sign in </AuthHeader>
+                <AuthForm noValidate onSubmit={this.onSubmit}>
+                    <AuthGroup>
+                        <label>
+                            <AuthLabel>Email address</AuthLabel>
+                            <AuthInput
+                                name="email"
+                                onChange={this.onChangeEmail}
+                                value={this.state.email}
+                                error={errors.email}
+                            />
+                            <AuthError>
+                                {errors.email}
+                                {errors.emailnotfound}
+                            </AuthError>
+                        </label>
+                    </AuthGroup>
+
+                    <AuthGroup>
+                        <label>
+                            <AuthLabel>Password</AuthLabel>
+                            <AuthInput
+                                name="password"
+                                type="password"
+                                onChange={this.onChangePassword}
+                                value={this.state.password}
+                                error={errors.password}
+                            />
+                            <AuthError>
+                                {errors.password}
+                                {errors.passwordincorrect}
+                            </AuthError>
+                        </label>
+                    </AuthGroup>
+
+                    <div>
+                        <AuthButton type="submit">Login</AuthButton>
+                    </div>
+                    <BottomGroup>
+                        <AuthLink>
+                            <Link to="/register">Sign up</Link>
+                        </AuthLink>
+                    </BottomGroup>
+                </AuthForm>
+            </BaseWrapper>
+        );
+    }
 }
 
 const mapStateToProps = (state: {
-  auth: AuthInterface;
-  errors: ErrorInterface;
+    auth: AuthInterface;
+    errors: ErrorInterface;
 }) => ({
-  auth: state.auth,
-  errors: state.errors,
+    auth: state.auth,
+    errors: state.errors
 });
 
 export default connect(mapStateToProps, { loginUser })(Login);

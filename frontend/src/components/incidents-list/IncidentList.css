@@ -1,39 +1,39 @@
 .high {
-  margin: 0 auto;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: #f9012c;
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #f9012c;
 }
 
 .open {
-  margin: 0 auto;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: #e3d10a;
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #e3d10a;
 }
 
 .Normal {
-  margin: 0 auto;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: #34d81d;
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #34d81d;
 }
 
 .Major {
-  margin: 0 auto;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: #8d1dd8;
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #8d1dd8;
 }
 
 .Critical {
-  margin: 0 auto;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: #060606;
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #060606;
 }

@@ -6,7 +6,7 @@ import {withRouter} from "react-router-dom";
 import {getUsersList} from "../../actions/authActions";
 import {dateFormat, IncidentEditForm} from "./ModalEditIncident";
 import {EditOutlined} from "@ant-design/icons";
-import moment from "moment";
+import moment, {Moment} from "moment";
 import {SimpleMap} from "../../utils/simple-map";
 
 type Incident = {
@@ -54,7 +54,7 @@ const EditIncidentFormWrapper: FunctionComponent<any> = (
 
 
   const onCreate = (values: any) => {
-    const resultData: SimpleMap<any> = {
+    const resultData: Incident = {
       ...values,
       _id: item._id,
       dateDue: values.dateDue.format(dateFormat),

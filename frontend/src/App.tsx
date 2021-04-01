@@ -23,11 +23,11 @@ interface JWTDeCode {
   email: string;
   iat: number;
   exp: number;
+  _id?: string;
 }
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
-  console.log(localStorage.jwtToken)
   // Set auth token header auth
   const token = JSON.parse(localStorage.jwtToken);
   setAuthToken(token);
@@ -36,7 +36,7 @@ if (localStorage.jwtToken) {
   const decoded: JWTDeCode = jwt_decode(token);
 
   // Set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
+  store.dispatch(setCurrentUser(decoded) as {type: string; payload: JWTDeCode});
 
   // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
@@ -56,7 +56,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route
-            exact path="/dashboard" component={Dashboard}
+            exact path="/dashboard" component={localStorage.jwtToken ? Dashboard : NotFound}
           />
         </div>
       </HashRouter>

@@ -31,7 +31,7 @@ const initialState: IncidentState = {
 
 export default function (
   state: IncidentState = initialState,
-  action: { type: string; payload: { _id: number | string } }
+  action: { type: string; payload: { _id: string } }
 ) {
   switch (action.type) {
     case CREATE_INCIDENT:
@@ -54,8 +54,9 @@ export default function (
       return {
         ...state,
         incidents: state.incidents.filter(
-          // @ts-ignore
-          (incident) => incident._id !== action.payload
+          (incident) => {
+            return incident._id !== action.payload._id
+          }
         ),
       };
     case GET_INCIDENT:
