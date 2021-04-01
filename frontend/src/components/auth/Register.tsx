@@ -35,8 +35,7 @@ class Register extends Component<
             email: '',
             password: '',
             password2: '',
-            position: '',
-            errors: {}
+            position: ''
         };
     }
 
@@ -45,14 +44,6 @@ class Register extends Component<
         const { history, auth } = this.props;
         if (auth.isAuthenticated) {
             history.push('/dashboard');
-        }
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps: { errors: ErrorInterface }) {
-        if (nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
         }
     }
 
@@ -95,7 +86,7 @@ class Register extends Component<
     };
 
     render() {
-        const { errors } = this.state;
+        const { errors } = this.props;
         const { name, email, position, password, password2 } = this.state;
         return (
             <BaseWrapper>

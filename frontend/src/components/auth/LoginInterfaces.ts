@@ -18,7 +18,6 @@ interface LoginProps {
 interface LoginState {
     email: string;
     password: string;
-    errors: ErrorInterface;
 }
 
 export type { AuthInterface, ErrorInterface, LoginState, LoginProps };

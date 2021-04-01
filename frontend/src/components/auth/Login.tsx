@@ -11,10 +11,10 @@ import {
     AuthHeader,
     AuthInput,
     AuthLabel,
+    AuthLabelEmpty,
     AuthLink,
     BaseWrapper,
-    BottomGroup,
-    AuthLabelEmpty
+    BottomGroup
 } from './AuthStyledComponents';
 import {
     AuthInterface,
@@ -28,8 +28,7 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
         super(props);
         this.state = {
             email: '',
-            password: '',
-            errors: {}
+            password: ''
         };
     }
 
@@ -41,19 +40,11 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps: {
-        auth: { isAuthenticated: boolean };
-        errors: ErrorInterface;
-    }) {
-        if (nextProps.auth.isAuthenticated) {
+    componentDidUpdate() {
+        const { auth } = this.props;
+        if (auth.isAuthenticated) {
             const { history } = this.props;
             history.push('/dashboard');
-        }
-
-        if (nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
         }
     }
 
@@ -81,7 +72,7 @@ class Login extends Component<LoginProps & RouteComponentProps, LoginState> {
     };
 
     render() {
-        const { errors } = this.state;
+        const { errors } = this.props;
         const { email, password } = this.state;
 
         return (

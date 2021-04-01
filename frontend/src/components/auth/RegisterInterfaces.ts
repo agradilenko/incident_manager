@@ -10,7 +10,6 @@ interface RegisterState {
     password: string;
     password2: string;
     position: string;
-    errors: ErrorInterface;
 }
 
 interface ErrorInterface {
